@@ -1,0 +1,26 @@
+CREATE DATABASE IF NOT EXISTS book;
+
+USE book;
+
+CREATE TABLE IF NOT EXISTS userss (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role ENUM('admin', 'user') DEFAULT 'user',
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS bookss (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  bookName VARCHAR(255) NOT NULL,
+  bookTitle VARCHAR(255) NOT NULL,
+  author VARCHAR(255) NOT NULL,
+  sellingPrice DECIMAL(10,2) NOT NULL,
+  publishDate DATE NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO userss (name, email, password, role)
+VALUES ('Admin User', 'admin@gmail.com', '$2a$10$gzj5T8LoBTVhJmJWEdx9IuOYWkKOOooCz4yckk7VtM6ZbwMsUZ/PK', 'admin')
+ON DUPLICATE KEY UPDATE email=email;
